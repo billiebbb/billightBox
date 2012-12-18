@@ -1,0 +1,205 @@
+.light_box {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 1200;
+	top: 0;
+	left: 0;
+}
+
+.light_box .bg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+	top: 0;
+	left: 0;
+}
+
+.light_box .box {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.light_box .box img:hover {
+	cursor: move;
+}
+
+.light_box .loading {
+	background-image: url(loader.gif);
+	background-position: center center;  
+}
+
+.light_box .prev_btn {	
+	width: 42px;
+	height: 42px;
+	background: transparent url(arrow_left.jpg);
+	cursor: pointer;
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+	left: 50%;
+	bottom: 120px;
+	position: absolute;
+	margin-left: -88px;
+}
+
+.light_box .next_btn {
+	width: 42px;
+	height: 42px;
+	background: transparent url(arrow_right.jpg);
+	cursor: pointer;
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+	left: 50%;
+	bottom: 120px;
+	position: absolute;
+	margin-left: 88px;
+}
+
+.light_box .prev_btn:hover, .light_box .next_btn:hover {
+	opacity: 1;
+	filter: alpha(opacity = 100);
+}
+
+.light_box .prev_btn.active, .light_box .next_btn.active {
+	background-position: 0 -42px;
+	cursor: default;
+	opacity: 0.2;
+	filter: alpha(opacity = 20);
+}
+
+.light_box .close_btn {
+	width: 42px;
+	height: 42px;
+	background: transparent url(cross.jpg);
+	cursor: pointer;
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+	left: 50%;
+	bottom: 120px;
+	position: absolute;
+	margin-left: 44px;
+}
+
+.light_box .close_btn:hover {
+	opacity: 1;
+	filter: alpha(opacity = 100);
+}
+
+.light_box .note {
+	color: #fff;
+	font-family: 微軟正黑體, Arial, Helvetica,sans-serif,STHeiti Light,儷黑 Pro,LiHei Pro,Microsoft Yahei,Microsoft JhengHei, 新細明體;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 20px;
+	position: absolute;
+}
+
+.light_box .slider {
+	position: absolute;
+	bottom: 10px;
+	width: auto;
+	height: auto;
+	left: 50%;
+}
+
+.light_box .thumb {
+	width: 60px;
+	height: 90px;
+	float: left;
+	position: relative;
+	margin: 2px 2px 0 0;
+	overflow: hidden;
+	display: block;
+}
+
+.light_box .thumb {
+	display: block;
+	position: relative;
+	cursor: pointer;
+}
+
+.light_box .thumb .border {
+	border: #4d75ff solid 4px;
+	width: 52px;
+	height: 82px;
+	position: absolute;
+	display: none;
+	top: 0;
+	left: 0;
+}
+
+.light_box .thumb:hover .border {
+	border: #4dffff solid 4px;
+	display: block;
+}
+
+.light_box .thumb.active .border {
+	display: block;
+}
+
+.light_box .footer {
+	width: 100%;
+	height: 110px;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+}
+
+.light_box .footer .bg {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: absolute;
+	background-color: #000;
+	opacity: 0.2;
+	filter: alpha(opacity = 20);
+}
+
+.light_box .play_btn {
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+	background: transparent url(play_btn.png) no-repeat;
+	width: 42px;
+	height: 42px;
+	left: 50%;
+	bottom: 120px;
+	position: absolute;
+	margin-left: 0;
+	cursor: pointer;
+}
+
+.light_box .type_btn {
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
+	background: transparent url(type_btn.png) no-repeat;
+	width: 42px;
+	height: 42px;
+	left: 50%;
+	bottom: 120px;
+	position: absolute;
+	margin-left: -44px;
+	cursor: pointer;
+}
+
+.light_box .play_btn:hover, .light_box .type_btn:hover {
+	opacity: 1;
+	filter: alpha(opacity = 100);
+}
+
+.light_box .play_btn.active, .light_box .type_btn.active {
+	background-position: 0 -42px;
+}
+
+.light_box .footer .play_timer {
+	width: 0px;
+	height: 2px;
+	background-color: #fff;
+	position: absolute;
+	top: 0;
+	margin-top: -3px;
+}
