@@ -8,20 +8,19 @@ var LightBox = function(){
 		<div class="light_box">\
 			<div class="bg"></div>\
 			<div class="box"></div>\
-			<div class="note">\
-				<div style="width: 300px; line-height: 24px; float: left;"><div class="icon-question-sign icon-white" style="margin: 3px 5px; float: left;"></div><div style="float: left;">滑鼠拖戈圖片可調整顯示位置</div></div>\
-				<div style="width: 300px; line-height: 24px; float: left;"><div class="icon-question-sign icon-white" style="margin: 3px 5px; float: left;"></div><div style="float: left;">按ESC鍵離開全螢幕顯示</div></div>\
+			<div class="type_btn display_btn lb_btn" title="顯示大圖\/填滿螢幕">\
+				<div class="text">原圖顯示</div>\
+				<div class="text2">符合螢幕</div>\
 			</div>\
+			<div class="close_btn lb_btn" title="關閉全螢幕"></div>\
+			<div class="next_btn lb_btn" title="下一張"></div>\
+			<div class="prev_btn lb_btn" title="上一張"></div>\
+			<div class="close_btn lb_btn" title="關閉全螢幕"></div>\
 			<div class="footer">\
 				<div class="bg"></div>\
 				<div class="slider"></div>\
 				<div class="play_timer"></div>\
 			</div>\
-			<div class="play_btn lb_btn" title="自動播放"></div>\
-			<div class="type_btn lb_btn" title="填滿\/顯示全部"></div>\
-			<div class="next_btn lb_btn" title="下一張"></div>\
-			<div class="prev_btn lb_btn" title="上一張"></div>\
-			<div class="close_btn lb_btn" title="關閉全螢幕"></div>\
 		</div>\
 	';
 	
@@ -51,9 +50,11 @@ var LightBox = function(){
 		
 		$.template( "lb_thumb", thumb );
 		
-		$('.light_box .close_btn').live('click', function(){
+		$('.light_box').on('click', '.close_btn', function(){
 			hide();
-		}).live('mouseenter', function(){
+		})
+
+		$('.light_box').on('mouseenter', '.close_btn', function(){
 			$(this).animate({
 				backgroundPosition: "0 -42px"
 			}, 500 , function(){
@@ -61,7 +62,7 @@ var LightBox = function(){
 			});
 		});
 		
-		$('.light_box .play_btn').live('click', function(){
+		$('.light_box').on('click', '.play_btn', function(){
 			
 			if($(this).is('.active')){
 				stopPlay();
@@ -70,7 +71,7 @@ var LightBox = function(){
 			}
 		});
 		
-		$('.light_box .type_btn').live('click', function(){
+		$('.light_box').on('click', '.type_btn', function(){
 			if(display_type == "fixed"){
 				display_type = "";
 				$(this).addClass('active');
@@ -79,10 +80,11 @@ var LightBox = function(){
 				$(this).removeClass('active');	
 			}
 			
-			box.find('img').resizeToParent({fadeIn: 500, zoom: 'drag', type: display_type});
+			var zoom = display_type == "fixed" ? "" : "flow" ;
+			box.unbind().find('img').resizeToParent({fadeIn: 500, zoom: zoom, type: display_type});
 		});
 		
-		$('.slider .thumb:not(".active")').live('click', function(){
+		$('.slider').on('click','.thumb:not(".active")', function(){
 			
 			var idx = slider.find('.thumb').index($(this));
 			
@@ -110,7 +112,7 @@ var LightBox = function(){
 			setCurrentSlide(idx);
 		});
 		
-		$('.light_box').find('.next_btn:not(".active"), .prev_btn:not(".active")').live('mouseenter', function(){
+		$('.light_box').on('mouseenter', '.next_btn:not(".active"), .prev_btn:not(".active")', function(){
 			var pos = ($(this).is('.next_btn'))? "42px 0" : "-42px 0";
 			  
 			$(this).stop(true, true).animate({
@@ -122,14 +124,17 @@ var LightBox = function(){
 			if($('.light_box .play_btn').is('.active')){
 				stopPlay();
 			}
-		}).live('click', function(){
+		})
+
+		$('.light_box').on('click', '.next_btn:not(".active"), .prev_btn:not(".active")', function(){
 			var idx = ($(this).is('.next_btn'))? index+1 : index-1;
 			slider.find('.thumb:eq(' + idx + ')').click();
 		});
 		
 		// $(".lb_btn").each(function(){
 			// $(this).tooltip({title: $(this).attr("title")});
-		// });		
+		// });
+		
 		$(window).resize(lbResize);
 	};
 	
@@ -150,11 +155,13 @@ var LightBox = function(){
 	};
 	
 	var lbResize = function(){
-		box.find('img').resizeToParent({fadeIn: 500, zoom: 'drag', type: display_type});
+		var zoom = display_type == "fixed" ? "" : "flow" ;
+		box.unbind().find('img').resizeToParent({fadeIn: 500, zoom: zoom, type: display_type});
 	};
 	
 	var show = function(options){
 		var img = options.images, idx = options.index, thumb = options.thumbs;
+		
 		if(typeof(img) == 'undefined' ) return;
 		
 		if(typeof(lightbox) == 'undefined'){
@@ -170,7 +177,8 @@ var LightBox = function(){
 		
 		slider.width((slider.find('.thumb:first').width() + 2) * img.length);
 		slider.find('.thumb img').resizeToParent();
-		slider.css('marginLeft', ((slider.width() < footer.width())? -slider.width()/2 : -footer.width()/2) + "px");		
+		slider.css('marginLeft', ((slider.width() < footer.width())? -slider.width()/2 : -footer.width()/2) + "px");
+		
 		$(document.body).addClass('lock');
 		
 		$(document).keyup(function(e) {
@@ -183,6 +191,13 @@ var LightBox = function(){
 		
 		lightbox.show();
 		setCurrentSlide(idx || 0);
+		
+		if(img.length <= 1) {
+			$('.light_box').find('.next_btn, .prev_btn').hide();	
+		}
+		else{
+			$('.light_box').find('.next_btn, .prev_btn').show();
+		}
 		
 	};
 	
@@ -211,7 +226,8 @@ var LightBox = function(){
 		var img = $('<img src="' + imgData[idx] + '" />').hide();
 		box.append(img);
 		
-		img.resizeToParent({fadeIn: 500, zoom: 'drag', type: display_type});
+		var zoom = display_type == "fixed" ? "" : "flow" ;
+		img.resizeToParent({fadeIn: 500, zoom: zoom, type: display_type});
 	};
 	
 	var nextSlide = function(){
@@ -220,9 +236,11 @@ var LightBox = function(){
 	};
 	
 	var hide = function(){
-		// console.log(body_scroll_top);
+		// console.log(body_scroll_top);
+
 		// main_container.removeClass('lock')
-		// $(window).scrollTo(body_scroll_top, 0);		stopPlay();
+		// $(window).scrollTo(body_scroll_top, 0);
+		stopPlay();
 		
 		$(document.body).removeClass('lock');
 		

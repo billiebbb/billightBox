@@ -24,13 +24,13 @@
 	height: 100%;
 }
 
+/*
 .light_box .box img:hover {
 	cursor: move;
-}
+}*/
 
 .light_box .loading {
-	background-image: url(loader.gif);
-	background-position: center center;  
+	background: transparent url(loader.gif) no-repeat center center;
 }
 
 .light_box .prev_btn {	
@@ -40,10 +40,10 @@
 	cursor: pointer;
 	opacity: 0.8;
 	filter: alpha(opacity = 80);
-	left: 50%;
-	bottom: 120px;
+	left: 30px;
+	top: 50%;
 	position: absolute;
-	margin-left: -88px;
+	margin-top: -21px;
 }
 
 .light_box .next_btn {
@@ -53,10 +53,10 @@
 	cursor: pointer;
 	opacity: 0.8;
 	filter: alpha(opacity = 80);
-	left: 50%;
-	bottom: 120px;
+	right: 30px;
+	top: 50%;
 	position: absolute;
-	margin-left: 88px;
+	margin-top: -21px;
 }
 
 .light_box .prev_btn:hover, .light_box .next_btn:hover {
@@ -78,10 +78,12 @@
 	cursor: pointer;
 	opacity: 0.8;
 	filter: alpha(opacity = 80);
-	left: 50%;
-	bottom: 120px;
+/*	left: 50%;*/
+/*	bottom: 120px;*/
 	position: absolute;
-	margin-left: 44px;
+	top: 20px;
+	right: 20px;
+/*	margin-left: 44px;*/
 }
 
 .light_box .close_btn:hover {
@@ -147,6 +149,7 @@
 	bottom: 0;
 	left: 0;
 	position: absolute;
+	display: none;
 }
 
 .light_box .footer .bg {
@@ -180,9 +183,9 @@
 	width: 42px;
 	height: 42px;
 	left: 50%;
-	bottom: 120px;
+	bottom: 20px;
 	position: absolute;
-	margin-left: -44px;
+	margin-left: -21px;
 	cursor: pointer;
 }
 
@@ -195,6 +198,35 @@
 	background-position: 0 -42px;
 }
 
+.light_box .display_btn [class*="text"] {
+	background-color: #FFFFFF;
+    color: #000000;
+    font-weight: bold;
+    height: 42px;
+    left: 44px;
+    line-height: 42px;
+    padding: 0 10px;
+    position: absolute;
+    width: 60px;
+}
+
+.light_box .display_btn .text2 {
+	display: none;
+}
+
+.light_box .display_btn.active .text2 {
+	display: block;
+}
+
+.light_box .display_btn .text {
+	display: block;
+	/*width: 35px;*/
+}
+
+.light_box .display_btn.active .text {
+	display: none;
+}
+
 .light_box .footer .play_timer {
 	width: 0px;
 	height: 2px;
@@ -202,4 +234,10 @@
 	position: absolute;
 	top: 0;
 	margin-top: -3px;
+}
+
+.light_box .lb_btn, .light_box .lb_btn [class*=text] {
+	-webkit-border-radius: 21px;
+	-moz-border-radius: 21px;
+	border-radius: 21px;
 }
